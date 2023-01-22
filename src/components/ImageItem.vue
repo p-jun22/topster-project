@@ -5,14 +5,15 @@
 
 <script>
 export default{
-    name: 'PosterItem'
+    name: 'ImageItem'
 }
 </script>
 
 <style scoped>
 div{
-    width: 88%;
-    padding-bottom: 88%;
+    margin: 4%;
+    width: 44%;
+    padding-bottom: 44%;
     background-color: aliceblue;
 }
 </style>

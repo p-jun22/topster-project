@@ -2,26 +2,34 @@
   <div id="app">
     <div class="main">
       <MenuTap>
-        <MenuButton v-for="button in buttons" :key="button" v-bind:name="button"></MenuButton>
       </MenuTap> 
       <PosterList></PosterList> 
-      <PosterReview></PosterReview>  
+      <PosterReview></PosterReview>
+      <DeleteButton></DeleteButton>
     </div>
   </div>
 </template>
 
 <script>
-import MenuButton from './components/MenuButton.vue';
 import MenuTap from './components/MenuTap.vue';
 import PosterList from './components/PosterList.vue';
 import PosterReview from './components/PosterReview.vue';
+import DeleteButton from './components/DeleteButton.vue';
 
 const HOST    = 'https://ws.audioscrobbler.com/2.0/?'
 
 export default {
   name: 'App',
+  created(){
+    this.$http.get('api/movies')
+      .then((res) => {
+        this.movies = res.data
+        console.log(this.movies[0])
+      })
+  },
   data(){
     return{
+      movies: [],
       result: '',
       buttons: [
         'Download', 
@@ -34,7 +42,7 @@ export default {
     }
   },
   components: {
-    MenuTap, MenuButton, PosterList, PosterReview
+    MenuTap, PosterList, PosterReview, DeleteButton
   },
   methods:{
     loadApiData(){
@@ -63,8 +71,8 @@ export default {
 
 .main{
   background-color: #202020;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   position: absolute;
   margin: 0;
